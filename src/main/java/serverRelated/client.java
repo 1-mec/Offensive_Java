@@ -6,7 +6,6 @@ import serialRelated.serialisation;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class client {
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException {
@@ -14,6 +13,8 @@ public class client {
         deserialisation d = new deserialisation();
         InetAddress addr = InetAddress.getLocalHost();
         Socket socket;
+        Process attaque = Runtime.getRuntime().exec("whoami");
+        String test2 = "touch /tmp/pwnd";
         int i = 0;
         for(;i <= 11; i++){
             socket = new Socket(addr.getHostName(),4444);
@@ -23,7 +24,7 @@ public class client {
             if (i == 10){
                 oos.writeObject("exit");
             } else {
-                oos.writeObject("test "+i);
+                oos.writeObject(test2);
             }
             d.setIs(socket.getInputStream());
             ObjectInputStream ois = (ObjectInputStream) d.getIs();
@@ -31,7 +32,7 @@ public class client {
             System.out.println("Message = "+msg);
             ois.close();
             oos.close();
-            Thread.sleep(100);
+            Thread.sleep(1000);
         }
 
 

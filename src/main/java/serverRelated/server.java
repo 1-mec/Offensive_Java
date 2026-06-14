@@ -1,16 +1,11 @@
 package serverRelated;
 
-import jakarta.xml.bind.DatatypeConverter;
 import serialRelated.deserialisation;
 import serialRelated.serialisation;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.security.MessageDigest;
-import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class server {
     public static void main(String arg[]) throws Exception{
@@ -26,19 +21,17 @@ public class server {
             client = ss.accept();
             System.out.println("UN client a fait erruption !");
 
-            d.setIs(client.getInputStream());
-            ObjectInputStream ois = (ObjectInputStream) d.getIs();
-            String msg = (String)ois.readObject();
+            d.setOis(client.getInputStream());
+            Object msg = d.getOis().readObject();
 
             System.out.println("Message Received: " + msg);
 
-            s.setOs(client.getOutputStream());
-            ObjectOutputStream oos = (ObjectOutputStream) s.getOs();
-            oos.writeObject("test " + msg);
-            ois.close();
-            oos.close();
+            s.setOos(client.getOutputStream());
+            s.getOos().writeObject("test " + msg);
+            d.getOis().close();
+            s.getOos().close();
             client.close();
-            if(msg.equalsIgnoreCase("exit")) break;
+            if(msg.equals("exit")) break;
         }
 
         System.out.println("Fin du serveur");

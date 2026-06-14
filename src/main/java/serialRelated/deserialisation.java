@@ -1,12 +1,10 @@
 package serialRelated;
 
-import target.classes.Personne;
 import java.io.*;
 
 public class deserialisation {
 
     private FileInputStream fis;
-    private InputStream is;
     private ObjectInputStream ois;
 
     public void setOis(FileInputStream fis) {
@@ -16,10 +14,9 @@ public class deserialisation {
             throw new RuntimeException(e);
         }
     }
-
-    public void setIs(InputStream is) {
+    public void setOis(InputStream is) {
         try {
-            this.is = new ObjectInputStream(is);
+            this.ois = new ObjectInputStream(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -33,10 +30,6 @@ public class deserialisation {
         }
     }
 
-    public InputStream getIs() {
-        return is;
-    }
-
     public FileInputStream getFis() {
         return fis;
     }
@@ -45,18 +38,5 @@ public class deserialisation {
         return ois;
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        deserialisation d = new deserialisation();
-
-        d.setFis("personne.ser");
-        FileInputStream file = d.getFis();
-        d.setOis(file);
-        Personne p1 = (Personne)d.getOis().readObject();
-        Personne p2 = (Personne)d.getOis().readObject();
-
-        System.out.println(p1);
-        System.out.println(p2);
-        d.getOis().close();
-    }
 
 }
