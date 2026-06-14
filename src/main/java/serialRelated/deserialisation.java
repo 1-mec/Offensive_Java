@@ -1,10 +1,12 @@
 package serialRelated;
 
+import target.classes.Personne;
 import java.io.*;
 
 public class deserialisation {
 
     private FileInputStream fis;
+    private InputStream is;
     private ObjectInputStream ois;
 
     public void setOis(FileInputStream fis) {
@@ -22,12 +24,24 @@ public class deserialisation {
         }
     }
 
+    public void setIs(InputStream is) {
+        try {
+            this.is = new ObjectInputStream(is);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void setFis(String file)  {
         try {
             this.fis = new FileInputStream(file);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public InputStream getIs() {
+        return is;
     }
 
     public FileInputStream getFis() {
