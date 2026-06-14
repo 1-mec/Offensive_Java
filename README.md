@@ -84,7 +84,7 @@ Connect client to the server:
 Launch vulnerability class:
 
 ```bash
-[java8path]/java -cp ../resources/commons-collections-3.2.1.jar:. target/classes/TestSerialisations
+[java8path]/java -cp ../resources/commons-collections-3.2.1.jar:. target/classes/TestSerialisations payload.ser
 ```
 
 ## Payload Generation
