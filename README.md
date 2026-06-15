@@ -57,7 +57,8 @@ serialRelated/serialisation.java \
 serialRelated/deserialisation.java \
 serverRelated/client.java \
 target/classes/Vulnerability.java \
-target/classes/TestSerialisations.java
+target/classes/TestSerialisations.java \
+target/classes/OwnGadget.java
 ```
 
 ## Running
@@ -84,7 +85,7 @@ Connect client to the server:
 Launch vulnerability class:
 
 ```bash
-[java8path]/java -cp ../resources/commons-collections-3.2.1.jar:. target/classes/TestSerialisations payload.ser
+[java8path]/java -cp ../resources/commons-collections-3.2.1.jar:. target/classes/Vulnerability payload.ser
 ```
 
 ## Payload Generation
@@ -103,6 +104,15 @@ Launch the TestSerialisation:
 [java8path]/java -cp ../resources/commons-collections-3.2.1.jar:. target/classes/TestSerialisations
 
 ```
+
+## OwnGadget
+
+Generate a basic payload like ysoserial
+```bash
+java target/classes/OwnGadget
+
+```
+
 
 The generated payload can then be used during deserialization experiments.
 
